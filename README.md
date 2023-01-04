@@ -251,7 +251,7 @@ _Note:_ You do not need to run `solve()` beforehand before producing the efficie
 There is an alternate way to utilise the Runge-Kutta method by employing an additional distinct $b$ array. The Butcher tableau for such methods take the form:
 
 $$
-  \begin{array}{c| c c c c}
+  \begin{array}{c| c c c c c}
     0\\
     c_2 & a_{21}\\
     c_3 & a_{31} & a_{32}\\
