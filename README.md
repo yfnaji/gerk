@@ -97,15 +97,9 @@ There is no consensus to what conditions must hold regarding the coefficients yo
 
 In this package, we have given you the option to overlook these conditions to provide more flexibility with experimentation.
 
-<p align=center>`condition_b`</p>:
+$$\sum^{r}_{i=1}b_i=1 \ \ \ \sum^{r}_{i=1}b_ic_i = 1/2 \ \ \ \sum^{r}_{j=1}a_{ij} = c_i$$
 
-$$\sum^{r}_{i=1}b_i=1$$
-
-`condition_bc`:
-$$\sum^{r}_{i=1}b_ic_i = 1/2$$
-
-`condition_Ac`: 
-$$\sum^{r}_{j=1}a_{ij} = c_i$$
+`condition_b`, `condition_bc` and `condition_Ac`
 
 These are all boolean arguments that are set to `False` by default to allow the user to freely experiment.
 
