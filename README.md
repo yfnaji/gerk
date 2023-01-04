@@ -31,9 +31,9 @@ The above tableau is often abbreviated to
 
 $$
   \begin{array}{c| c}
-    \bold{c} & \bold{A}\\
+    c & A\\
     \hline
-      & \bold{b}
+      & b
   \end{array}\\ \\
 $$
 
