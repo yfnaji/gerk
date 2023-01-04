@@ -297,9 +297,9 @@ where $n=\min\left(p,q\right)$, where $p$ and $q$ are the orders $^1$ of $b_i$ a
 
 $^1$ A Runge-Kutta method has order $p$ if
 
-$\sum^{p}_{i=1}b_i=1$ (`condition_b`)
-$\sum^{p}_{i=1}b_ic_i = 1/2$ (`condition_bc`)
-$\sum^{p}_{j=1}a_{ij} = c_i$ (`condition_Ac`)
+$\sum^{p}_{i=1}b_i=1$
+$\sum^{p}_{i=1}b_ic_i = 1/2$
+$\sum^{p}_{j=1}a_{ij} = c_i$
 
 However, it is difficult to calculate the order when these conditions are not met. Therefore to simplify things, $h$ will be re-calculated in the same way whether these conditions are met or not. _Note_ that by using $b_i$ and $b^*_i$ you are technically using _2_ Runge-Kutta methods simultaneously and so they may have dstinct orders.
 
