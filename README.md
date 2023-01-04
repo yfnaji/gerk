@@ -259,7 +259,7 @@ $$
     c_r & a_{r1} & a_{r2} & \cdots & a_{rr-1}\\
     \hline
       & b_1 & b_2 & \cdots & b_{r-1} & b_r\\
-      & b^*_1 & b^*_2 & \cdots & b^*_{r-1} & b^*_r\\
+      & b^{*}_1 & b^{*}_2 & \cdots & b^{*}_{r-1} & b^{*}_r\\
   \end{array}\\ \\
 $$
 
@@ -297,11 +297,11 @@ where $n=\min\left(p,q\right)$, where $p$ and $q$ are the orders $^1$ of $b_i$ a
 
 $^1$ A Runge-Kutta method has order $p$ if
 
-* $\sum^{p}_{i=1}b_i=1$ (`condition_b`)
-* $\sum^{p}_{i=1}b_ic_i = 1/2$ (`condition_bc`)
-* $\sum^{p}_{j=1}a_{ij} = c_i$ (`condition_Ac`)
+$\sum^{p}_{i=1}b_i=1$ (`condition_b`)
+$\sum^{p}_{i=1}b_ic_i = 1/2$ (`condition_bc`)
+$\sum^{p}_{j=1}a_{ij} = c_i$ (`condition_Ac`)
 
-However, it is difficult to calculate the order when these conditions are not met. Therefore to simplify things, $h$ will be re-calculated in the same way whether these conditions are met or not.
+However, it is difficult to calculate the order when these conditions are not met. Therefore to simplify things, $h$ will be re-calculated in the same way whether these conditions are met or not. _Note_ that by using $b_i$ and $b^*_i$ you are technically using _2_ Runge-Kutta methods simultaneously and so they may have dstinct orders.
 
 ### Adaptive Runge-Kutta example
 
@@ -349,8 +349,8 @@ c = [
 
 Note that we can impose conditions on `b_star` similar to that of `b` with the following arguments:
 
-* `condition_b_star`: $\sum^{r}_{i=1} b^{*}_{i} = 1$
-* `condition_b_star_c`: $\sum^{r}_{i=1} b^{*}_{i}c_{i} = 1/2$
+`condition_b_star`: $\sum^{r}_{i=1} b^{*}_{i} = 1$
+`condition_b_star_c`: $\sum^{r}_{i=1} b^{*}_{i}c_{i} = 1/2$
 
 These conditions will be set to `False` (which is the default) in this example.
 

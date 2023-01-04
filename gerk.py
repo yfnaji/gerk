@@ -136,7 +136,7 @@ class Gerk:
         if self.b_star is None:
             h = decimal.Decimal((self.final-self.ic[0]))/decimal.Decimal((self.time_steps))
         else:
-            h =self.time_steps
+            h =decimal.Decimal(self.time_steps)
         
         if self.b_star is not None:
             order = 1/decimal.Decimal(min(len([_b for _b in self.b if _b]), len([_b for _b in self.b_star if _b])))
