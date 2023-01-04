@@ -5,9 +5,10 @@ import decimal
 from _gerk_error import (
     GerkArrayError,
     GerkFunctionError, 
+    GerkAdaptiveError,
     GerkArrayErrorEnum,
     GerkFunctionErrorEnum,
-    GerkToleranceError
+    GerkAdaptiveErrorEnum,
 )
 
 # decimal.getcontext().prec = 16
@@ -15,7 +16,30 @@ decimal.getcontext().rounding = decimal.ROUND_HALF_EVEN
 
 
 class Gerk:
-    
+    """
+    The Generalized Explicit Runge-Kutta class (GERK)
+
+    Attributes
+        A (list): A matrix of the Butcher tableau
+        b (list): b array of the Butcher tableau
+        c (list): c array of the Butcher tableau
+        time_steps (int or float): Number of discretizations for Ordinary Runge-Kutta method
+                                   Initial step size for the adaptive Runge-Kutta method
+        initial_conditions (tuple): initial condition coordinate
+        final (float or int): Final value before the Runge-Kutta method terminates
+        func (callable): The function defined in the system dy/dx = f(x,y)
+        real_values (callable or list): The function that solves the system explicitly 
+                                        or list containing the value of the real y values
+        b_star (list): The array of the additional b values for the adaptive Runge-Kutta method
+        tolerance (float): The minimum error threshold for the adaptive Runge-Kutta method
+
+    Additional Paramters
+        condition_b (bool): Activate condition sum(b) == 1
+        condition_bc (bool): Activate condition sum(b*c) == 1/2
+        condition_Ac (bool): Activate condition sum(A[i]) == c[i]
+        condition_b_star (bool): Activate condition sum(b_star) == 1
+        condition_b_star_c (bool): Activate condition sum(b_star*c) == 1/2
+    """
     def __init__(
         self, 
         A, 
@@ -120,32 +144,41 @@ class Gerk:
         self.b_star = _process_array(b_star) if b_star else None
 
         if b_star is not None and not tolerance:
-            self.tol = decimal.Decimal(0.001)
+            self.tolerance = decimal.Decimal(0.001)
         elif tolerance and tolerance < 0:
-                raise GerkToleranceError("tolerance must be greater than 0")
+                raise GerkAdaptiveError(GerkAdaptiveErrorEnum.bad_tolerance)
         elif tolerance:
-            self.tol = decimal.Decimal(tolerance)
+            self.tolerance = decimal.Decimal(tolerance)
 
-        self.ic = initial_conditions
+        self.initial_condition = initial_conditions
         self.final = final
         self.time_steps = time_steps
 
     def solve(self):
-
+        """
+        Executes the Runge-Kutta method on the system defined in the object 
+        """
         k = [decimal.Decimal(0) for i in range(len(self.b))]
         if self.b_star is None:
-            h = decimal.Decimal((self.final-self.ic[0]))/decimal.Decimal((self.time_steps))
+            h = decimal.Decimal((self.final-self.initial_condition[0]))/decimal.Decimal((self.time_steps))
         else:
             h =decimal.Decimal(self.time_steps)
         
         if self.b_star is not None:
             order = 1/decimal.Decimal(min(len([_b for _b in self.b if _b]), len([_b for _b in self.b_star if _b])))
         
-        x_n = decimal.Decimal(self.ic[0])
-        y_n = decimal.Decimal(self.ic[1])
+        x_n = decimal.Decimal(self.initial_condition[0])
+        y_n = decimal.Decimal(self.initial_condition[1])
         self.X = [x_n]
         self.Y = [y_n]
-    
+        
+        if x_n < self.final:
+            _forward = True
+            _backward = False
+        else:
+            _forward = False
+            _backward = True
+
         def _k_eval(x, y, k_values):
             for i in range(len(self.A)):
                 x += self.c[i]*h
@@ -156,7 +189,7 @@ class Gerk:
                 except TypeError:
                     raise GerkFunctionError(GerkFunctionErrorEnum.unknown_variables)
 
-        while x_n < self.final:
+        while (_forward and x_n < self.final) or (_backward and x_n > self.final):
 
             _k_eval(x_n, y_n, k)
             if self.b_star is not None:
@@ -166,8 +199,8 @@ class Gerk:
                 
                 e = abs(y_auth-y_hat)
 
-                if e > self.tol:
-                    h *= decimal.Decimal(0.9)*(self.tol/e)**order
+                if e > self.tolerance:
+                    h *= decimal.Decimal(0.9)*(self.tolerance/e)**order
                     continue
 
             x_n += h
@@ -183,6 +216,18 @@ class Gerk:
             x_label="x",
             y_label="y"
         ):
+        """
+        Plots the approximated curve created by the Runge-Kutta method
+        Note: Must run solve() first
+
+        Parameters
+            with_real (bool): Plot real curve with approximated curve
+                              Note: Requires real_values attribute to be set
+            title (str): Title of the plot
+            x_label (str): x-axis label
+            y_label (str): y-axis label
+        """
+
         
         if with_real:
             _y = [self.real_values(x) for x in self.X]
@@ -199,12 +244,24 @@ class Gerk:
 
     @property
     def get_approximations(self):
+        """
+        Returns a list of the approximated values at every time step
+
+        Returns
+            list
+        """
         if not self.Y:
             raise GerkArrayError(GerkArrayErrorEnum.no_real_values)
         return self.Y
 
     @property
     def get_errors(self):
+        """
+        Returns a list of the errors at every time step
+
+        Returns
+            list
+        """
         if not self.real_values:
             raise GerkArrayError(GerkArrayErrorEnum.no_real_values)
         
@@ -220,6 +277,12 @@ class Gerk:
 
 
     def efficiency_graph(self):
+        """
+        Creates the efficiency graph for the system defined in the object
+        """
+
+        if self.b_star is not None:
+            raise GerkAdaptiveError(GerkAdaptiveErrorEnum.cannot_plot_efficiency_graph)
 
         discretizations = [
             100,
@@ -227,7 +290,7 @@ class Gerk:
             10_000,
             100_000,
             1_000_000
-        ]
+        ]        
 
         max_e = []
         for ts in discretizations:

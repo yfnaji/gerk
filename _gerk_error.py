@@ -21,6 +21,11 @@ class GerkFunctionErrorEnum(Enum):
     unknown_variables = 1
 
 
+class GerkAdaptiveErrorEnum(Enum):
+    bad_tolerance = 0
+    cannot_plot_efficiency_graph = 1
+
+
 class GerkArrayError(Exception):
     __module__ = "builtins"
     def __init__(self, err, *args):
@@ -81,5 +86,14 @@ class GerkFunctionError(Exception):
         super().__init__(msg)
 
 
-class GerkToleranceError(Exception):
+class GerkAdaptiveError(Exception):
     __module__ = "builtins"
+
+    def __init__(self, err, *args):
+        if err.value == 0:
+            msg = "tolerance must be greater than 0!"
+        elif err.value == 1:
+            msg = "Cannot create Efficiency Graph for "
+            msg += "Adaptive Runge-Kutta methods"
+
+        super().__init__(msg)
