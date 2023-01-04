@@ -97,7 +97,8 @@ There is no consensus to what conditions must hold regarding the coefficients yo
 
 In this package, we have given you the option to overlook these conditions to provide more flexibility with experimentation.
 
-<p align=center>`condition_b`</p>: 
+<p align=center>`condition_b`</p>:
+
 $$\sum^{r}_{i=1}b_i=1$$
 
 `condition_bc`:
