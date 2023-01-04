@@ -85,7 +85,7 @@ As seen in mathematics above, there is quite a bit information required to execu
 - `b` The $b$ array. Must be a list of floats, decimals or integers
 - `c` The $c$ array. Must be a list of floats, decimals or integers
 - `initial_conditions` A `tuple` that acts as the coordinate of the initial condition values
-- `final` Where you want the Runge-Kutta method to approximate up to on the $x$-axis
+- `final` The value of $x$ for which we terminate the Runge-Kutta method
 - `time_steps` The number of discretizations you want to apply on the from the initial $x_0$ to `final`. Must be an integer
 - `func` The function expression to be numerically integrated
 - `real_values` (Optional) A `callable` which is the explicit solution to the initial value problem _**or**_ a list of real values **Note** the list must be of size `time_steps + 1`
@@ -187,7 +187,7 @@ rk_obj = Gerk(
         initial_conditions=(0, 1), 
         time_steps=1000, 
         final=5,
-        func=lambda y: y,
+        func=lambda x, y: y, # Remember, you must define both x and y as variables, even if one is not used
         real_values = lambda y: math.exp(y)
     )
 ```
@@ -358,17 +358,17 @@ adj_rk = Gerk(
     b=b, 
     c=c, 
     initial_conditions=(-5.0, math.exp(-25.0)),
-    time_steps=0.01, 
+    time_steps=0.001, 
     final=5,
     func=lambda x,y: -2*x*y,
     real_values=lambda x: math.exp(-x**2),
-    adapt=b_star,
-    tolerance=0.00000001
+    b_star=b_star,
+    tolerance=0.00001
 )
 
 adj_rk.solve()
 
-adj_rk.plot()
+adj_rk.plot(with_real=True)
 ```
 
 ![rk_adaptive](https://user-images.githubusercontent.com/59436765/210466230-cbee11e0-02e5-49ab-92f1-553e302a972f.png)
