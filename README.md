@@ -97,7 +97,7 @@ There is no consensus to what conditions must hold regarding the coefficients yo
 
 In this package, we have given you the option to overlook these conditions to provide more flexibility with experimentation.
 
-$$\sum^{r}_{i=1}b_i=1 \ \ \ \sum^{r}_{i=1}b_ic_i = 1/2 \ \ \ \sum^{r}_{j=1}a_{ij} = c_i$$
+$$\sum^{r}_{i=1}b_i=1 \ \ \ \ \sum^{r}_{i=1}b_ic_i = 1/2 \ \ \ \ \sum^{r}_{j=1}a_{ij} = c_i$$
 
 `condition_b`, `condition_bc` and `condition_Ac`
 
@@ -250,18 +250,9 @@ _Note:_ You do not need to run `solve()` beforehand before producing the efficie
 
 There is an alternate way to utilise the Runge-Kutta method by employing an additional distinct $b$ array. The Butcher tableau for such methods take the form:
 
-$$
-  \begin{array}{c| c c c c c}
-    0\\
-    c_2 & a_{21}\\
-    c_3 & a_{31} & a_{32}\\
-    \vdots & \vdots &  & \ddots\\
-    c_r & a_{r1} & a_{r2} & \cdots & a_{rr-1}\\
-    \hline
-      & b_1 & b_2 & \cdots & b_{r-1} & b_r\\
-      & b^{*}_1 & b^{*}_2 & \cdots & b^{*}_{r-1} & b^{*}_r\\
-  \end{array}\\ \\
-$$
+
+<img width="242" alt="adaptive_butcher" src="https://user-images.githubusercontent.com/59436765/210662922-f5fbf612-a56b-4679-af2c-5eca4956771d.png">
+
 
 where $b^*_i$ is the additional $b$ array.
 
