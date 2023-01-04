@@ -123,7 +123,7 @@ $$
 \frac{\text{d}y}{\text{d}x} = y
 $$
 
-with the initial condition $(0, 1)$ and will be making approximations up to $x=5$. The domain we are working on $0\leqx\eq5$ will be discretized into 1000 steps.
+with the initial condition $(0, 1)$ and will be making approximations up to $x=5$. The domain we are working on $0\leq x\leq5$ will be discretized into 1000 steps.
 
 The 3/8-th rule has the following Butcher tableau:
 
@@ -204,17 +204,18 @@ We can now plot our approximated curve. Note that because we have defined `real_
 rk_obj.plot(with_real=True)
 ```
 
-[Insert graphic]
+![rk_example](https://user-images.githubusercontent.com/59436765/210466156-f86bfb1e-f088-4791-a16a-01220298e6bd.png)
+
 
 ### `get_approximations` example
 
 The approximated values $y_n$ for each timestep can be obtained by running `get_approximations` which returns a list of the values:
 
 ```
-rk_obj.get_approximations[0:10]
+rk_obj.get_approximations[2:5]
 ```
 
-> Insert Array here
+> [Decimal('1.010062750717580079753282335'), Decimal('1.015132034738508612169525261'), Decimal('1.020226760387164317916560525')]
 
 _Note_ that this is a _property_ and not a method, so no need for parentheses.
 
@@ -227,10 +228,10 @@ In our example, we set `real_values=lambda x: math.exp(x)` which will be used to
 By simply calling `get_errors`, we obtain all the errors in the form of a list (again, no need for parentheses):
 
 ```
-rk_obj.get_errors[0:10]
+rk_obj.get_errors[2:5]
 ```
 
-> Insert array here
+> [Decimal('0.00001258363341213062577786389261'), Decimal('0.00001897012278968249653135224731'), Decimal('0.00002542036040854158088425155254')]
 
 ## Efficiency Graphs
 
@@ -240,7 +241,8 @@ We can create an efficiency graph for the Runge-Kutta method provided that `real
 rk_obj.efficiency_graph()
 ```
 
-[Insert graphic here]
+![efficiency_graph](https://user-images.githubusercontent.com/59436765/210466181-fbc3a2ea-0fac-44b9-a067-bf01bf72ee8f.png)
+
 
 _Note:_ You do not need to run `solve()` beforehand before producing the efficiency graph.
 
@@ -377,6 +379,7 @@ adj_rk.solve()
 adj_rk.plot()
 ```
 
-[Insert Graphic here]
+![rk_adaptive](https://user-images.githubusercontent.com/59436765/210466230-cbee11e0-02e5-49ab-92f1-553e302a972f.png)
+
 
 In this case, the Runge-Kutta approximation is so accurate that we can barely see the exact curve!
