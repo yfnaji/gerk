@@ -34,8 +34,7 @@ class Gerk:
         condition_b_star = False,
         condition_b_star_c = False,
     ):
-        # TODO: Docstring
-
+    
         def _process_array(arr):
     
             if type(arr) is not list:
@@ -122,9 +121,9 @@ class Gerk:
 
         if b_star is not None and not tolerance:
             self.tol = decimal.Decimal(0.001)
-        elif tolerance < 0:
+        elif tolerance and tolerance < 0:
                 raise GerkToleranceError("tolerance must be greater than 0")
-        else:
+        elif tolerance:
             self.tol = decimal.Decimal(tolerance)
 
         self.ic = initial_conditions
@@ -134,7 +133,7 @@ class Gerk:
     def solve(self):
 
         k = [decimal.Decimal(0) for i in range(len(self.b))]
-        if self.b_star is not None:
+        if self.b_star is None:
             h = decimal.Decimal((self.final-self.ic[0]))/decimal.Decimal((self.time_steps))
         else:
             h =self.time_steps
@@ -168,8 +167,6 @@ class Gerk:
                 e = abs(y_auth-y_hat)
 
                 if e > self.tol:
-                    print("hit")
-                    print("tol")
                     h *= decimal.Decimal(0.9)*(self.tol/e)**order
                     continue
 
@@ -236,7 +233,6 @@ class Gerk:
         for ts in discretizations:
             self.time_steps = ts
             self.solve()
-            print(max(self.get_errors), len(self.X))
             max_e.append(math.log10(max(self.get_errors)))
  
         t_ = [math.log10(t) for t in discretizations]
