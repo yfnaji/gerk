@@ -294,11 +294,11 @@ $$
 \sum^{p}_{j=1}a_{ij} = c_i  \ \ \ \ 
 $$
 
-the same conditions defined above with the paramters `condition_b`, `condition_bc` and `condition_Ac` respectively. 
+the same conditions defined above with the parameters `condition_b`, `condition_bc` and `condition_Ac` respectively. 
 
-However, it is difficult to calculate the order when these conditions are not met. Therefore to simplify things, $h$ will be re-calculated in the same way whether these conditions are met or not. _Note_ that by using $b_i$ and $b^*_i$ you are technically using _2_ Runge-Kutta methods simultaneously and so they may have dstinct orders.
+However, it is difficult to calculate the order when these conditions are not met. Therefore to simplify things, $h$ will be re-calculated in the same way whether these conditions are met or not.
 
-Note that you can enforce the same conditions on $b^*_i$ with the parameters `condition_b_star` and `condition_b_star_c` for the first two conditions. Again, these are set to `False` by default.
+Note that you can impose the same conditions on $b^*_i$ with the parameters `condition_b_star` and `condition_b_star_c` for the first two conditions. Again, these are set to `False` by default.
 
 ### Adaptive Runge-Kutta example
 
