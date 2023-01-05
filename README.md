@@ -394,6 +394,7 @@ In this case, the Runge-Kutta approximation is so accurate that we can barely se
 Efficiency graphs are not available for the adaptive Runge-Kutta method as the number discretizations is not constant.
 
 <h1>Additional Notes</h1>
+
 * I have taken some inspiration from [this paper](https://www.mdpi.com/2297-8747/21/4/46) by M. A. Demba, N.Senu and F. Ismail and from [Jim Verner's](https://www.sfu.ca/~jverner/) extensive research in exploring Runge-Kutta possibilities
 
 * Future works will include
