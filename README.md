@@ -221,7 +221,7 @@ We can now plot our approximated curve. Note that because we have defined `real_
 rk_obj.plot(with_real=True)
 ```
 
-<img width="242"  alt="rk_example" src=https://user-images.githubusercontent.com/59436765/210466156-f86bfb1e-f088-4791-a16a-01220298e6bd.png>
+<img width="500" alt="rk_example" src=https://user-images.githubusercontent.com/59436765/210466156-f86bfb1e-f088-4791-a16a-01220298e6bd.png>
 
 
 <h2 id="get-approx-eg">`get_approximations` example</h2>
@@ -306,9 +306,7 @@ where $n=\min\left(p,q\right)$, where $p$ and $q$ are the orders $^1$ of $b_i$ a
 $^1$ A Runge-Kutta method has order $p$ if
 
 $$
-\sum^{p}_{i=1}b_i = 1 \ \ \ \ 
-\sum^{p}_{i=1}b_ic_i = 1/2 \ \ \ \ 
-\sum^{p}_{j=1}a_{ij} = c_i  \ \ \ \ 
+\sum^{p}_{i=1}b_i = 1 \ \ \ \ \sum^{p}_{i=1}b_ic_i = 1/2 \ \ \ \ \sum^{p}_{j=1}a_{ij} = c_i  \ \ \ \ 
 $$
 
 the same conditions defined above with the parameters `condition_b`, `condition_bc` and `condition_Ac` respectively. 
