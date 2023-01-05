@@ -395,6 +395,7 @@ Efficiency graphs are not available for the adaptive Runge-Kutta method as the n
 
 <h1>Additional Notes</h1>
 * I have taken some inspiration from [this paper](https://www.mdpi.com/2297-8747/21/4/46) by M. A. Demba, N.Senu and F. Ismail and from [Jim Verner's](https://www.sfu.ca/~jverner/) extensive research in exploring Runge-Kutta possibilities
+
 * Future works will include
    1. Accept `numpy.array` as parameter input
    2. Extend and generalize the adaptive Runge-Kutta Method [M. A. Demba, N.Senu and F. Ismail](https://www.mdpi.com/2297-8747/21/4/46)
