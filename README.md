@@ -2,7 +2,24 @@
 
 A package for the curious mathematicians and engineers who want to experiment the Runge-Kutta method with their own coefficients.
 
-## Runge-Kutta Overview
+# Contents
+
+1. [Runge-Kutta Overview](#rko)
+2. [What is Gerk?](#wig)
+3. [How to use Gerk](#h2ug)
+    * [Attributes](#attr)
+    * [Condition Arguments](#cond-arg)
+    * [Methods](#methods)
+3. [Example](#example)
+    * [Creating the Gerk Object](#cgo)
+    * [plot example](#plot-eg)
+    * [get_approximations example](#get-approx-eg)
+    * [get_errors example](#get-err-eg)
+    * [efficiency_graph example](#eff-graph-eg)
+5. [Adaptive Runge-Kutta Methods](#ark)
+6. [Adaptive Runge-Kutta Example](#ark-eg)
+
+<h1 id="rko">Runge-Kutta Overview</h1>
 
 Runge-Kutta methods aim to numerically solve ordinary differential equations of the form:
 
@@ -61,13 +78,13 @@ $$
 
 The idea is that we try to approximate the slope at point $y_n$ to ascertain the ascent (or descent) to attain the next predicted value of $y$.
 
-## What is Gerk?
+<h1 id="wig">What is Gerk?</h1>
 
 Most packages for the Runge-Kutta method usually have the coefficients $a_{ij}$, $b_i$ and $c_i$ determined beforehand for known methods such of the *Forward-Euler method*, the *1/4 rule*, *the 3/8 rule* etc, but do not allow one to create their own Runge-Kutta.
 
 Gerk is an easy interface to allow the user to determine their own coefficient values for the Runge-Kutta method. The package can return the approximations in the form of an array, a plot (using matplotlib) and also compare with real values (if available) to produce error values and even an efficiency graph!
 
-## How to use Gerk
+<h1 id="h2ug">How to use Gerk</h1>
 
 We can simply import `Gerk` in the following way:
 
@@ -77,7 +94,7 @@ from gerk import Gerk
 
 provided you have placed the file in the appropriate folder.
 
-### Main Arguments
+<h2 id="attr">Attributes</h2>
 
 As seen in mathematics above, there is quite a bit information required to execute the Runge-Kutta method. This has been broken down into arguments to be passed into the `Gerk` class:
 
@@ -91,7 +108,7 @@ As seen in mathematics above, there is quite a bit information required to execu
 - `real_values` (Optional) A `callable` which is the explicit solution to the initial value problem _**or**_ a list of real values **Note** the list must be of size `time_steps + 1`
 
 
-### Condition Arguments
+<h2 id="cond-arg">Condition Arguments</h2>
 
 There is no consensus to what conditions must hold regarding the coefficients you choose for your method, however, some known Runge-Kutta methods do consistently conform to some of these conditions. 
 
@@ -103,7 +120,7 @@ $$\sum^{r}_{i=1}b_i=1 \ \ \ \ \sum^{r}_{i=1}b_ic_i = 1/2 \ \ \ \ \sum^{r}_{j=1}a
 
 These are all boolean arguments that are set to `False` by default to allow the user to freely experiment.
 
-### Methods
+<h2 id="methods">Methods</h2>
 
 * `solve` calculates the value of $y_n$ for each time step. It will return all the approximated values in a list
 
@@ -113,9 +130,9 @@ Once `solve` has been run, the following methods will be available to run:
 * `get_approximation` returns the approximated values of $y$
 * `get_errors` returns the errors (only applicable if `real_values` argument was used) 
 
-## Example
+<h1 id="example">Example</h1>
 
-### Creating Gerk Object
+<h2 id="cgo">Creating the Gerk Object</h2>
 
 In the example below, we will use the 3/8-th rule to approximate the following initial value problem:
 
@@ -196,7 +213,7 @@ To finally get the approximated values, we run `rk_obj.solve()`.
 
 After running `solve`, 3 methods are now available to us:
 
-### `plot` example
+<h2 id="plot-eg">`plot` example</h2>
 
 We can now plot our approximated curve. Note that because we have defined `real_values`, we also have the option to plot the exact solution by setting the `with_real` flag to `True` (which is the default).
 
@@ -207,7 +224,7 @@ rk_obj.plot(with_real=True)
 ![rk_example](https://user-images.githubusercontent.com/59436765/210466156-f86bfb1e-f088-4791-a16a-01220298e6bd.png)
 
 
-### `get_approximations` example
+<h2 id="get-approx-eg">`get_approximations` example</h2>
 
 The approximated values $y_n$ for each timestep can be obtained by running `get_approximations` which returns a list of the values:
 
@@ -219,7 +236,7 @@ rk_obj.get_approximations[2:5]
 
 _Note_ that this is a _property_ and not a method, so no need for parentheses.
 
-### 'get_errors' example
+<h2 id="get-err-eg">'get_errors' example</h2>
 
 The errors for each time step can also be obtained if the `real_value` parameter has been set.
 
@@ -233,7 +250,7 @@ rk_obj.get_errors[2:5]
 
 > [Decimal('0.00001258363341213062577786389261'), Decimal('0.00001897012278968249653135224731'), Decimal('0.00002542036040854158088425155254')]
 
-## Efficiency Graphs
+<h2 id="eff-graph-eg">Efficiency Graphs</h2>
 
 We can create an efficiency graph for the Runge-Kutta method provided that `real_values` has been set to a callable function. This can be done by simply running:
 
@@ -246,7 +263,7 @@ rk_obj.efficiency_graph()
 
 _Note:_ You do not need to run `solve()` beforehand before producing the efficiency graph.
 
-## Adaptive Runge-Kutta Methods
+<h1 id="ark">Adaptive Runge-Kutta Methods</h1>
 
 There is an alternate way to utilise the Runge-Kutta method by employing an additional distinct $b$ array. The Butcher tableau for such methods take the form:
 
@@ -300,7 +317,7 @@ However, it is difficult to calculate the order when these conditions are not me
 
 Note that you can impose the same conditions on $b^*_i$ with the parameters `condition_b_star` and `condition_b_star_c` for the first two conditions. Again, these are set to `False` by default.
 
-### Adaptive Runge-Kutta example
+<h1 id="ark-eg">Adaptive Runge-Kutta example</h1>
 
 In this example, we will try to numerically integrate
 
