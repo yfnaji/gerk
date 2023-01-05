@@ -123,12 +123,13 @@ These are all boolean arguments that are set to `False` by default to allow the 
 <h2 id="methods">Methods</h2>
 
 * `solve` calculates the value of $y_n$ for each time step. It will return all the approximated values in a list
+*  `efficiency_graph` plots the efficiency graph of the Runge-Kutta method for the defined system for time steps 100, 1,000, 10,000, 100,000 and 1,000,000
 
 Once `solve` has been run, the following methods will be available to run:
 
 * `plot` Creates a graph of the approximated curve. If you have set the (optional) `real_values` argument, you can plot both the approximated and exact curves in one plot by setting `with_real=True`. You also have the option to amend `x_label` and `y_label` which are arugments of the method
 * `get_approximation` returns the approximated values of $y$
-* `get_errors` returns the errors (only applicable if `real_values` argument was used) 
+* `get_errors` returns the errors (only applicable if `real_values` argument was used)
 
 <h1 id="example">Example</h1>
 
@@ -213,7 +214,7 @@ To finally get the approximated values, we run `rk_obj.solve()`.
 
 After running `solve`, 3 methods are now available to us:
 
-<h2 id="plot-eg">`plot` example</h2>
+<h2 id="plot-eg">plot example</h2>
 
 We can now plot our approximated curve. Note that because we have defined `real_values`, we also have the option to plot the exact solution by setting the `with_real` flag to `True` (which is the default).
 
@@ -224,7 +225,7 @@ rk_obj.plot(with_real=True)
 <img width="500" alt="rk_example" src=https://user-images.githubusercontent.com/59436765/210466156-f86bfb1e-f088-4791-a16a-01220298e6bd.png>
 
 
-<h2 id="get-approx-eg">`get_approximations` example</h2>
+<h2 id="get-approx-eg">get_approximations example</h2>
 
 The approximated values $y_n$ for each timestep can be obtained by running `get_approximations` which returns a list of the values:
 
@@ -236,7 +237,7 @@ rk_obj.get_approximations[2:5]
 
 _Note_ that this is a _property_ and not a method, so no need for parentheses.
 
-<h2 id="get-err-eg">'get_errors' example</h2>
+<h2 id="get-err-eg">get_errors example</h2>
 
 The errors for each time step can also be obtained if the `real_value` parameter has been set.
 
@@ -250,7 +251,7 @@ rk_obj.get_errors[2:5]
 
 > [Decimal('0.00001258363341213062577786389261'), Decimal('0.00001897012278968249653135224731'), Decimal('0.00002542036040854158088425155254')]
 
-<h2 id="eff-graph-eg">Efficiency Graphs</h2>
+<h2 id="eff-graph-eg">Efficiency Graph</h2>
 
 We can create an efficiency graph for the Runge-Kutta method provided that `real_values` has been set to a callable function. This can be done by simply running:
 
@@ -388,5 +389,12 @@ adj_rk.plot(with_real=True)
 
 <img width="500" alt="rk_adaptive" src="https://user-images.githubusercontent.com/59436765/210466230-cbee11e0-02e5-49ab-92f1-553e302a972f.png">
 
-
 In this case, the Runge-Kutta approximation is so accurate that we can barely see the exact curve!
+
+Efficiency graphs are not available for the adaptive Runge-Kutta method as the number discretizations is not constant.
+
+<h1>Additional Notes</h1>
+* I have taken some inspiration from [this paper](https://www.mdpi.com/2297-8747/21/4/46) by M. A. Demba, N.Senu and F. Ismail and from [Jim Verner's](https://www.sfu.ca/~jverner/) extensive research in exploring Runge-Kutta possibilities
+* Future works will include
+   1. Accept `numpy.array` as parameter input
+   2. Extend and generalize the adaptive Runge-Kutta Method [M. A. Demba, N.Senu and F. Ismail](https://www.mdpi.com/2297-8747/21/4/46)
