@@ -221,7 +221,7 @@ We can now plot our approximated curve. Note that because we have defined `real_
 rk_obj.plot(with_real=True)
 ```
 
-![rk_example](https://user-images.githubusercontent.com/59436765/210466156-f86bfb1e-f088-4791-a16a-01220298e6bd.png)
+<img width="242"  alt="rk_example" src=https://user-images.githubusercontent.com/59436765/210466156-f86bfb1e-f088-4791-a16a-01220298e6bd.png>
 
 
 <h2 id="get-approx-eg">`get_approximations` example</h2>
@@ -388,7 +388,7 @@ adj_rk.solve()
 adj_rk.plot(with_real=True)
 ```
 
-![rk_adaptive](https://user-images.githubusercontent.com/59436765/210466230-cbee11e0-02e5-49ab-92f1-553e302a972f.png)
+<img width="500" alt="rk_adaptive" src="https://user-images.githubusercontent.com/59436765/210466230-cbee11e0-02e5-49ab-92f1-553e302a972f.png">
 
 
 In this case, the Runge-Kutta approximation is so accurate that we can barely see the exact curve!
