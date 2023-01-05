@@ -258,7 +258,7 @@ We can create an efficiency graph for the Runge-Kutta method provided that `real
 rk_obj.efficiency_graph()
 ```
 
-![efficiency_graph](https://user-images.githubusercontent.com/59436765/210466181-fbc3a2ea-0fac-44b9-a067-bf01bf72ee8f.png)
+<img width="242" alt="efficiency_graph" src=https://user-images.githubusercontent.com/59436765/210466181-fbc3a2ea-0fac-44b9-a067-bf01bf72ee8f.png>
 
 
 _Note:_ You do not need to run `solve()` beforehand before producing the efficiency graph.
