@@ -29,7 +29,7 @@ $$
 
 with a given initial condition $(x_0, y_0)$. 
 
-We define a member of the Runge-Kutta family with a *butcher tableau*:
+We define a member of the Runge-Kutta family with a *Butcher tableau*:
 
 $$
   \begin{array}{c| c c c c}
@@ -54,7 +54,7 @@ $$
   \end{array}\\ \\
 $$
 
-The Butcher tableau presents the category of coefficients that will be used to define our Runge-Kutta method.
+The Butcher tableau presents the category of coefficients that will be used in our Runge-Kutta method.
 
 The $n^\text{th}$ evaluation of the solution will be denoted as $(x_n, y_n)$. We also define $h$ as the time step i.e. the step size from the previous approximation to the next, and therefore
 
@@ -62,7 +62,7 @@ $$
 x_{n+1} = x_{n} + h
 $$
 
-Before defining $y_n$, we must familiarize ourselves with another array $k$. We define the $i^{\text{th}}$ row of $k$ for the $n^\text{th}$ as:
+Before defining $y_n$, we must familiarize ourselves with another array $k$. We define the $i^{\text{th}}$ row of $k$ for the $n^\text{th}$ approximation as:
 
 $$
 k_i(x_n, y_n) = f\left(x_n + c_i h, y_n + \sum^{i-1}_{j=1} a_{ij}k_j(x_n, y_n)\right)
@@ -76,7 +76,7 @@ $$
 y_{n+1} = y_{n} + h \sum^{r}_{i=1}b_i k_{i}(x_n, y_n)
 $$
 
-The idea is that we try to approximate the slope at point $y_n$ to ascertain the ascent (or descent) to attain the next predicted value of $y$.
+The idea is that we calculate the slope at point $y_n$ to ascertain the ascent (or descent) to attain the next predicted value, $y_{n+1}$.
 
 <h1 id="wig">What is Gerk?</h1>
 
