@@ -54,7 +54,7 @@ $$
   \end{array}\\ \\
 $$
 
-The Butcher tableau presents the category of coefficients that will be used in our Runge-Kutta method.
+The Butcher tableau presents the categories of coefficients that will be used in our Runge-Kutta method.
 
 The $n^\text{th}$ evaluation of the solution will be denoted as $(x_n, y_n)$. We also define $h$ as the time step i.e. the step size from the previous approximation to the next, and therefore
 
@@ -62,7 +62,7 @@ $$
 x_{n+1} = x_{n} + h
 $$
 
-Before defining $y_n$, we must familiarize ourselves with another array $k$. We define the $i^{\text{th}}$ row of $k$ for the $n^\text{th}$ approximation as:
+Before defining $y_n$, we must familiarize ourselves with the array $k$. We define the $i^{\text{th}}$ row of $k$ at $(x_n, y_n)$ AS:
 
 $$
 k_i(x_n, y_n) = f\left(x_n + c_i h, y_n + \sum^{i-1}_{j=1} a_{ij}k_j(x_n, y_n)\right)
@@ -70,19 +70,19 @@ $$
 
 where $f$ is the function defined in the differential equation above. Note the recursion in the second argument of $f$ where we sum rows preceding $k_{i}$ and apply a scale factor of $a_{ij}$.
 
-We now have everything we need to calculate $y_n$:
+We now have everything we need to calculate $y_{n+1}$:
 
 $$
 y_{n+1} = y_{n} + h \sum^{r}_{i=1}b_i k_{i}(x_n, y_n)
 $$
 
-The idea is that we calculate the slope at point $y_n$ to ascertain the ascent (or descent) to attain the next predicted value, $y_{n+1}$.
+The idea is to calculate various slopes at point $y_n$ to ascertain a weighted of the ascent (or descent) and add it to the previous approximation.
 
 <h1 id="wig">What is Gerk?</h1>
 
-Most packages for the Runge-Kutta method usually have the coefficients $a_{ij}$, $b_i$ and $c_i$ determined beforehand for known methods such of the *Forward-Euler method*, the *1/4 rule*, *the 3/8 rule* etc, but do not allow one to create their own Runge-Kutta.
+Most packages for the Runge-Kutta method usually have the coefficients $a_{ij}$, $b_i$ and $c_i$ determined beforehand for known methods such as the *Forward-Euler method*, the *1/4 rule*, *the 3/8 rule* etc, but do not allow one to customerize their own Runge-Kutta.
 
-Gerk is an easy interface to allow the user to determine their own coefficient values for the Runge-Kutta method. The package can return the approximations in the form of an array, a plot (using matplotlib) and also compare with real values (if available) to produce error values and even an efficiency graph!
+Gerk is an easy interface to allow the user to determine their own coefficient values for the Runge-Kutta method. The package can return the approximations in the form of an array, a plot of the approximated curve (using matplotlib) and also compare with real values (if available) to produce errors and even an efficiency graph!
 
 <h1 id="h2ug">How to use Gerk</h1>
 
@@ -92,25 +92,23 @@ We can simply import `Gerk` in the following way:
 from gerk import Gerk
 ```
 
-provided you have placed the file in the appropriate folder.
-
 <h2 id="attr">Attributes</h2>
 
 As seen in mathematics above, there is quite a bit information required to execute the Runge-Kutta method. This has been broken down into arguments to be passed into the `Gerk` class:
 
-- `A` The $A$ matrix in the Butcher tableau. This **must** be a lower triangular matrix that is formatted as a list of lists that contain floats, decimals or integers **Note**: Fractions must be in a string i.e. "1/3"
+- `A` The $A$ matrix in the Butcher tableau. This **must** be a lower triangular matrix that is formatted as a list of lists that contain floats, decimals or integers **Note**: Fractions must be in a string e.g. "1/3"
 - `b` The $b$ array. Must be a list of floats, decimals or integers
 - `c` The $c$ array. Must be a list of floats, decimals or integers
-- `initial_conditions` A `tuple` that acts as the coordinate of the initial condition values
+- `initial_conditions` A `tuple` that acts as the coordinate of the initial condition values $(x_0, y_0)$
 - `final` The value of $x$ for which we terminate the Runge-Kutta method
-- `time_steps` The number of discretizations you want to apply on the from the initial $x_0$ to `final`. Must be an integer
+- `time_steps` The number of discretizations you want to apply on the from the starting point $x_0$ to `final`. Must be an integer
 - `func` The function expression to be numerically integrated
 - `real_values` (Optional) A `callable` which is the explicit solution to the initial value problem _**or**_ a list of real values **Note** the list must be of size `time_steps + 1`
 
 
 <h2 id="cond-arg">Condition Arguments</h2>
 
-There is no consensus to what conditions must hold regarding the coefficients you choose for your method, however, some known Runge-Kutta methods do consistently conform to some of these conditions. 
+There is no consensus to what conditions must hold regarding the coefficients you choose for your method, however, some known Runge-Kutta methods do consistently conform to some known conditions:
 
 These conditions are
 
@@ -139,7 +137,7 @@ $$
 \frac{\text{d}y}{\text{d}x} = y
 $$
 
-with the initial condition $(0, 1)$ and will be making approximations up to $x=5$. The domain we are working on $0\leq x\leq5$ will be discretized into 1000 steps.
+with the initial condition $(0, 1)$ and will be making approximations up to $x=5$ with 1000 time steps.
 
 The 3/8-th rule has the following Butcher tableau:
 
@@ -208,13 +206,13 @@ rk_obj = Gerk(
     )
 ```
 
-To finally get the approximated values, we run `rk_obj.solve()`.
+We can now run `rk_obj.solve()`.
 
 After running `solve`, 3 methods are now available to us:
 
 <h2 id="plot-eg">plot example</h2>
 
-We can now plot our approximated curve. Note that because we have defined `real_values`, we also have the option to plot the exact solution by setting the `with_real` flag to `True` (which is the default).
+We can now plot our approximated curve. Note that because we have defined `real_values`, we also have the option to plot the exact solution by setting the `with_real` flag to `True`.
 
 ```
 rk_obj.plot(with_real=True)
