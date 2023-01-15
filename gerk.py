@@ -305,26 +305,3 @@ class Gerk:
         plt.ylabel("$log_{10}(\max(error))$")
         plt.plot(t_, max_e)
         plt.show()
-
-A = [ 
-        ["1/3"], # Remember, fractions must be passed as strings
-        ["-1/3", 1],
-        [1, -1, 1]
-]
-
-b = ["1/8", "3/8", "3/8", "1/8"]
-
-c = [0, "1/3", "2/3", 1]
-
-rk_obj = Gerk(
-        A=A, 
-        b=b, 
-        c=c, 
-        initial_conditions=(0, 1), 
-        time_steps=1000, 
-        final=5,
-        func=lambda x, y: y, # Remember, you must define both x and y as variables, even if one is not used
-        real_values = lambda y: math.exp(y)
-    )
-rk_obj.solve()
-rk_obj.plot(with_real=True)
