@@ -101,14 +101,14 @@ As seen in mathematics above, there is quite a bit information required to execu
 - `c` The $c$ array. Must be a list of floats, decimals or integers
 - `initial_conditions` A `tuple` that acts as the coordinate of the initial condition values $(x_0, y_0)$
 - `final` The value of $x$ for which we terminate the Runge-Kutta method
-- `time_steps` The number of discretizations you want to apply on the from the starting point $x_0$ to `final`. Must be an integer
+- `time_steps` The number of times steps you want to apply on the from the starting point $x_0$ to `final`. Must be an integer
 - `func` The function expression to be numerically integrated
 - `real_values` (Optional) A `callable` which is the explicit solution to the initial value problem _**or**_ a list of real values **Note** the list must be of size `time_steps + 1`
 
 
 <h2 id="cond-arg">Condition Arguments</h2>
 
-There is no consensus to what conditions must hold regarding the coefficients you choose for your method, however, some known Runge-Kutta methods do consistently conform to some known conditions:
+There is no consensus to what conditions must hold regarding the coefficients you choose for your method, however, some known Runge-Kutta methods do consistently conform to some known conditions.
 
 These conditions are
 
@@ -118,14 +118,14 @@ which can be enforced by the boolean parameters `condition_b`, `condition_bc` an
 
 <h2 id="methods">Methods</h2>
 
-* `solve` calculates the value of $y_n$ for each time step. It will return all the approximated values in a list
+* `solve` can be run to calculate the approximate value of $y_n$ for each time step
 *  `efficiency_graph` plots the efficiency graph of the Runge-Kutta method for the defined system for time steps 100, 1,000, 10,000, 100,000 and 1,000,000
 
-Once `solve` has been run, the following methods will be available to run:
+Once `solve` has been run, the following methods will be available to execute:
 
 * `plot` Creates a graph of the approximated curve. If you have set the (optional) `real_values` argument, you can plot both the approximated and exact curves in one plot by setting `with_real=True`. You also have the option to amend `x_label` and `y_label` which are arugments of the method
-* `get_approximation` returns the approximated values of $y$
-* `get_errors` returns the errors (only applicable if `real_values` argument was used)
+* `get_approximation` returns the approximated values of $y$ in a list
+* `get_errors` returns the error for each approximation $y_n$ in a list (only applicable if `real_values` argument was used)
 
 <h1 id="example">Example</h1>
 
@@ -184,7 +184,7 @@ b = ["1/8", "3/8", "3/8", "1/8"]
 c = [0, "1/3", "2/3", 1]
 ```
 
-We now have sufficient information to utilise the `Gerk` class. However, we know the solution to the initial value problem is $y=e^x$. So in this case we can utilise the `real_values` parameter by setting it to the lambda function:
+We now have sufficient information to create `Gerk` object. However, we know the solution to the initial value problem is $y=e^x$. So in this case, we can utilise the `real_values` parameter by setting it to the lambda function:
 
 ```
 lambda x,y: math.exp(x)
@@ -235,9 +235,7 @@ _Note_ that this is a _property_ and not a method, so no need for parentheses.
 
 <h2 id="get-err-eg">get_errors example</h2>
 
-The errors for each time step can also be obtained if the `real_value` parameter has been set.
-
-In our example, we set `real_values=lambda x: math.exp(x)` which will be used to calculate the error at each step. 
+The errors for each time step can also be obtained if the `real_value` parameter has been set. In this example, we set `real_values=lambda x: math.exp(x)` which will be used to calculate the error at each step. 
 
 By simply calling `get_errors`, we obtain all the errors in the form of a list (again, no need for parentheses):
 
@@ -258,7 +256,7 @@ rk_obj.efficiency_graph()
 <img width="500" alt="efficiency_graph" src=https://user-images.githubusercontent.com/59436765/210466181-fbc3a2ea-0fac-44b9-a067-bf01bf72ee8f.png>
 
 
-_Note:_ You do not need to run `solve()` beforehand before producing the efficiency graph.
+_Note:_ You do not need to run `solve()` beforehand to produce efficiency graph.
 
 <h1 id="ark">Adaptive Runge-Kutta Methods</h1>
 
@@ -270,7 +268,7 @@ There is an alternate way to utilise the Runge-Kutta method by employing an addi
 
 where $b^*_i$ is the additional $b$ array.
 
-This method is not too disimilar to the original Runge-Kutta method, but there is an extra step. We calculate the $k$'s in the same way as before, but there is an extra step when evaluating $y_{n+1}$. 
+This method is not too disimilar to the original Runge-Kutta method. We calculate the $k$'s in the same way as before, but there is an extra step when evaluating $y_{n+1}$. 
 
 Although we do calculate $y_{n+1}$ in same way outlined above, we also calculate $\hat{y}_{n+1}$:
 
@@ -286,11 +284,11 @@ $$
 E := \left|y_{n+1}-\hat{y}_{n+1}\right|
 $$
 
-Now we define the tolerance, $\mathcal{E}$, which will act as the upper bound for $E$.
+Now we define the tolerance, $\mathcal{E}$, which will act as the maximum acceptable value for $E$.
 
-If $E<\mathcal{E}$, then we accept the value of $y_{n+1}$ and we increment $x_{n}$ by $h$ and start the process again for $x_{n+1}$. 
+If $E<\mathcal{E}$, then we accept the value of $y_{n+1}$ and we increment $x_{n}$ by $h$ and start the process again for $x_{n+1}$ and $y_{n+1}$ as normal. 
 
-However, if $E\geq\mathcal{E}$, we will need to adjust the value of $h$ and redo the calculation with this renewed value in an attempt to statisfy the condition $E<\mathcal{E}$. 
+However, if $E\geq\mathcal{E}$, we will need to adjust the value of $h$ and redo the calculation with this renewed time step value in an attempt to satisfy the condition $E<\mathcal{E}$. 
 
 The value of $h$ will be adjusted as follows:
 
@@ -300,15 +298,15 @@ $$
 
 where $n=\min\left(p,q\right)$, where $p$ and $q$ are the orders $^1$ of $b_i$ and $b^*_i$ respectively.
 
-$^1$ A Runge-Kutta method has order $p$ if
+$^1$ A Runge-Kutta method with matrix $A$ and arrays $b$ and $c$ has order $p$ if
 
 $$
 \sum^{p}_{i=1}b_i = 1 \ \ \ \ \sum^{p}_{i=1}b_ic_i = 1/2 \ \ \ \ \sum^{p}_{j=1}a_{ij} = c_i  \ \ \ \ 
 $$
 
-similar to the conditions defined above with the parameters `condition_b`, `condition_bc` and `condition_Ac` respectively. 
+These are similar to the conditions defined above with the parameters `condition_b`, `condition_bc` and `condition_Ac` respectively. 
 
-However, it is difficult to calculate the order when these conditions are not met. Therefore to simplify things, $h$ will be re-calculated in the same way whether these conditions are met or not. In the future, we aim to come up with a solution to reflect a more appropriate solution.
+However, it is difficult to calculate the order when these conditions are not met. Therefore, to simplify things, $h$ will be re-calculated in the same way whether these conditions are met or not. In the future, we aim to come up with a solution to reflect a more appropriate solution.
 
 Note that you can impose the same conditions on $b^*_i$ with the parameters `condition_b_star` and `condition_b_star_c` for the first two conditions. Again, these are set to `False` by default.
 
@@ -320,7 +318,7 @@ $$
 \frac{\text{d}y}{\text{d}x}=-2xy
 $$
 
-will initial conditions $(-5, e^{-25})$. Note that the solution is $y=e^{-x^2}$.
+with initial conditions $(-5, 1.3887943865\times 10^{-11})$. Note that the exact solution is $y=e^{-x^2}$.
 
 Here we will use the Fehlberg RK1(2) method which has the following Butcher tableau:
 
@@ -335,7 +333,7 @@ $$
   \end{array}\\ \\
 $$
 
-We require an additional argument for the $b^*$ vector:
+We require an additional argument for the $b^*$ vector, which in `Gerk` is called `b_star`:
 
 ```
 A = [
@@ -356,9 +354,7 @@ c = [
 ]
 ```
 
-These conditions will be set to `False` (which is the default) in this example.
-
-Also, the idea of discretizations is meaningless in this context since the step size is constantly changing. Therefore, the `time_steps` parameter will be used as the *starting* time step, which we will set to 0.01 in this example.
+The idea of discretizations is meaningless in this context since the step size is constantly changing. Therefore, the `time_steps` parameter will be used as the *starting* time step, which we will set to 0.01 in this example.
 
 We will set the tolerance to a punitive value of 0.00000001. _Note: if `tolerance` is not set, a default value of 0.001 will be used instead.
 
