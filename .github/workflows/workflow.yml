@@ -3,9 +3,3 @@ on:
     branches: [ $default-branch ]
   pull_request:
     branches: [ $default-branch ]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: workflow
