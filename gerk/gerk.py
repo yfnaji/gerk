@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import decimal
-from _gerk_error import (
+from ._gerk_error import (
     GerkArrayError,
     GerkFunctionError, 
     GerkAdaptiveError,
