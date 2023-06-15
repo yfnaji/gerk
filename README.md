@@ -30,7 +30,7 @@ $$
 with a given initial condition $(x_0, y_0)$. 
 
 We define a member of the Runge-Kutta family with a *Butcher tableau*:
-
+<!-- 
 $$
   \begin{array}{c| c c c c}
     0\\
@@ -41,18 +41,21 @@ $$
     \hline
       & b_1 & b_2 & \cdots & b_{r-1} & b_r
   \end{array}\\ \\
-$$
+$$ -->
 
+<img width="247" alt="genrk" src="https://github.com/yfnaji/Gerk/assets/59436765/c35b7df0-0080-41bf-8f1d-04a53ad9dac5">
 
 The above tableau is often abbreviated to
 
-$$
+<!-- $$
   \begin{array}{c| c}
     c & A\\
     \hline
       & b
   \end{array}\\ \\
-$$
+$$ -->
+
+<img width="103" alt="abbrk" src="https://github.com/yfnaji/Gerk/assets/59436765/561bd4fb-d488-44cf-9246-56cb392ad66d">
 
 The Butcher tableau presents the categories of coefficients that will be used in our Runge-Kutta method.
 
@@ -141,7 +144,7 @@ with the initial condition $(0, 1)$ and will be making approximations up to $x=5
 
 The 3/8-th rule has the following Butcher tableau:
 
-$$
+<!-- $$
   \begin{array}{c| c c c}
     0\\
     1/3 & 1/3\\
@@ -150,8 +153,9 @@ $$
     \hline
       & 1/8 & 3/8 & 3/8 & 1/8
   \end{array}\\ \\
-$$
+$$ -->
 
+<img width="236" alt="rk_eg" src="https://github.com/yfnaji/Gerk/assets/59436765/0105ab38-e0b3-4b97-b5d7-d3fcc1eddb2b">
 
 The $A$ lower triangular matrix in the Butcher tableau above can be implemented in the following way:
 
@@ -194,6 +198,8 @@ lambda x,y: math.exp(x)
 Now we are ready to create the `Gerk` object:
 
 ```
+import math
+
 rk_obj = Gerk(
         A=A, 
         b=b, 
@@ -322,7 +328,7 @@ with initial conditions $(-5, 1.3887943865\times 10^{-11})$. Note that the exact
 
 Here we will use the Fehlberg RK1(2) method which has the following Butcher tableau:
 
-$$
+<!-- $$
   \begin{array}{c| c c c}
     0 \\
     1/2 & 1/2\\
@@ -331,7 +337,9 @@ $$
       & 1/512 & 255/256 & 1/512\\
       & 1/512 & 255/256 & 0\\
   \end{array}\\ \\
-$$
+$$ -->
+
+<img width="252" alt="adaptrk" src="https://github.com/yfnaji/Gerk/assets/59436765/bd1e8482-0153-49b2-809e-5a9424ecccd2">
 
 We require an additional argument for the $b^*$ vector, which in `Gerk` is called `b_star`:
 
