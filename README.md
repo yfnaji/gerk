@@ -62,7 +62,7 @@ $$
 x_{n+1} = x_{n} + h
 $$
 
-Before defining $y_n$, we must familiarize ourselves with the array $k$. We define the $i^{\text{th}}$ row of $k$ at $(x_n, y_n)$ AS:
+Before defining $y_n$, we must familiarize ourselves with the array $k$. We define the $i^{\text{th}}$ row of $k$ at $(x_n, y_n)$ as:
 
 $$
 k_i(x_n, y_n) = f\left(x_n + c_i h, y_n + \sum_{j=1}^{i-1} a_{ij}k_j(x_n, y_n)\right)
@@ -112,7 +112,7 @@ There is no consensus to what conditions must hold regarding the coefficients yo
 
 These conditions are
 
-$$\sum^{r}_{i=1}b_i=1 \ \ \ \ \sum^{r}_{i=1}b_ic_i = 1/2 \ \ \ \ \sum^{r}_{j=1}a_{ij} = c_i$$
+$$\sum_{i=1}^{r}b_i=1 \ \ \ \ \sum_{i=1}^{r}b_ic_i = 1/2 \ \ \ \ \sum_{j=1}^{r}a_{ij} = c_i$$
 
 which can be enforced by the boolean parameters `condition_b`, `condition_bc` and `condition_Ac` respectively. These parameters have been set to `False` by default to allow the user to freely explore and experiment.
 
@@ -273,7 +273,7 @@ This method is not too disimilar to the original Runge-Kutta method. We calculat
 Although we do calculate $y_{n+1}$ in same way outlined above, we also calculate $\hat{y}_{n+1}$:
 
 $$
-y_{n+1} = y_{n} + h \sum^{r}_{i=1}b_i\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y}_{n+1} = y_{n} + h \sum^{r}_{i=1}b^*_i\cdot k_{i}(x_n, y_n)
+y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_i\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y}_{n+1} = y_{n} + h \sum_{i=1}^{r}b^*_i\cdot k_{i}(x_n, y_n)
 $$
 
 _Note_ that the calculation for $\hat{y}$ requires the use of $y_n$ and **not** $\hat{y}_n$.
