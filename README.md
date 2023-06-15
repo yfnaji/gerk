@@ -273,7 +273,7 @@ This method is not too disimilar to the original Runge-Kutta method. We calculat
 Although we do calculate $y_{n+1}$ in same way outlined above, we also calculate $\hat{y}_{n+1}$:
 
 $$
-y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_i\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y}_{n+1} = y_{n} + h \sum_{i=1}^{r}b^*_i\cdot k_{i}(x_n, y_n)
+y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_i\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y}_{n+1} = y_{n} + h \sum_{i=1}^{r}b_{i}^{*}\cdot k_{i}(x_n, y_n)
 $$
 
 _Note_ that the calculation for $\hat{y}$ requires the use of $y_n$ and **not** $\hat{y}_n$.
