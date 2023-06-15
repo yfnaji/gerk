@@ -301,7 +301,7 @@ where $n=\min\left(p,q\right)$, where $p$ and $q$ are the orders $^1$ of $b_i$ a
 $^1$ A Runge-Kutta method with matrix $A$ and arrays $b$ and $c$ has order $p$ if
 
 $$
-\sum^{p}_{i=1}b_i = 1 \ \ \ \ \sum^{p}_{i=1}b_ic_i = 1/2 \ \ \ \ \sum^{p}_{j=1}a_{ij} = c_i  \ \ \ \ 
+\sum_{i=1}^{p}b_i = 1 \ \ \ \ \sum_{i=1}^{p}b_ic_i = 1/2 \ \ \ \ \sum_{j=1}^{p}a_{ij} = c_i  \ \ \ \ 
 $$
 
 These are similar to the conditions defined above with the parameters `condition_b`, `condition_bc` and `condition_Ac` respectively. 
