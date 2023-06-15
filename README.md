@@ -62,10 +62,10 @@ $$
 x_{n+1} = x_{n} + h
 $$
 
-Before defining $y_n$, we must familiarize ourselves with the array $k$. We define the $i^{\text{th}}$ row of $k$ at $(x_n, y_n)$ AS:
+Before defining $y_n$, we must familiarize ourselves with the array $k$. We define the $i^{\text{th}}$ row of $k$ at $(x_n, y_n)$ as:
 
 $$
-k_i(x_n, y_n) = f\left(x_n + c_i h, y_n + \sum^{i-1}_{j=1} a_{ij}k_j(x_n, y_n)\right)
+k_i(x_n, y_n) = f\left(x_n + c_i h, y_n + \sum_{j=1}^{i-1} a_{ij}k_j(x_n, y_n)\right)
 $$
 
 where $f$ is the function defined in the differential equation above. Note the recursion in the second argument of $f$ where we sum rows preceding $k_{i}$ and apply a scale factor of $a_{ij}$.
@@ -73,7 +73,7 @@ where $f$ is the function defined in the differential equation above. Note the r
 We now have everything we need to calculate $y_{n+1}$:
 
 $$
-y_{n+1} = y_{n} + h \sum^{r}_{i=1}b_i k_{i}(x_n, y_n)
+y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_i k_{i}(x_n, y_n)
 $$
 
 The idea is to calculate various slopes at point $y_n$ to ascertain a weighted of the ascent (or descent) and add it to the previous approximation.
@@ -112,7 +112,7 @@ There is no consensus to what conditions must hold regarding the coefficients yo
 
 These conditions are
 
-$$\sum^{r}_{i=1}b_i=1 \ \ \ \ \sum^{r}_{i=1}b_ic_i = 1/2 \ \ \ \ \sum^{r}_{j=1}a_{ij} = c_i$$
+$$\sum_{i=1}^{r}b_i=1 \ \ \ \ \sum_{i=1}^{r}b_ic_i = 1/2 \ \ \ \ \sum_{j=1}^{r}a_{ij} = c_i$$
 
 which can be enforced by the boolean parameters `condition_b`, `condition_bc` and `condition_Ac` respectively. These parameters have been set to `False` by default to allow the user to freely explore and experiment.
 
@@ -273,7 +273,7 @@ This method is not too disimilar to the original Runge-Kutta method. We calculat
 Although we do calculate $y_{n+1}$ in same way outlined above, we also calculate $\hat{y}_{n+1}$:
 
 $$
-y_{n+1} = y_{n} + h \sum^{r}_{i=1}b_i\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y}_{n+1} = y_{n} + h \sum^{r}_{i=1}b^*_i\cdot k_{i}(x_n, y_n)
+y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_i\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y_{n+1}} = y_{n} + h \sum_{i=1}^{r} b_{i}^{\ast}\cdot k_{i}(x_n, y_n)
 $$
 
 _Note_ that the calculation for $\hat{y}$ requires the use of $y_n$ and **not** $\hat{y}_n$.
@@ -301,7 +301,7 @@ where $n=\min\left(p,q\right)$, where $p$ and $q$ are the orders $^1$ of $b_i$ a
 $^1$ A Runge-Kutta method with matrix $A$ and arrays $b$ and $c$ has order $p$ if
 
 $$
-\sum^{p}_{i=1}b_i = 1 \ \ \ \ \sum^{p}_{i=1}b_ic_i = 1/2 \ \ \ \ \sum^{p}_{j=1}a_{ij} = c_i  \ \ \ \ 
+\sum_{i=1}^{p}b_i = 1 \ \ \ \ \sum_{i=1}^{p}b_ic_i = 1/2 \ \ \ \ \sum_{j=1}^{p}a_{ij} = c_i  \ \ \ \ 
 $$
 
 These are similar to the conditions defined above with the parameters `condition_b`, `condition_bc` and `condition_Ac` respectively. 
