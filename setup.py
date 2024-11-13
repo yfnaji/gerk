@@ -3,7 +3,7 @@ from pathlib import Path
 import codecs
 import os
 
-VERSION = "0.0.5"
+VERSION = "1.0.0"
 DESCRIPTION = "Generalized Explicit Runge-Kutta"
 
 this_directory = Path(__file__).parent
@@ -18,8 +18,15 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    install_requires=["matplotlib", "numpy"],
-    keywords=["runge-kutta", "runge", "kutta", "numerical", "integration", "approximation"],
+    install_requires=["numpy"],
+    keywords=[
+        "runge-kutta", 
+        "runge", 
+        "kutta", 
+        "numerical", 
+        "integration", 
+        "approximation"
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: Unix",

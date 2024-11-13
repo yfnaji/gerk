@@ -1,1 +1,1 @@
-from .gerk import Gerk
+from .gerk import gerk, adaptive_gerk
