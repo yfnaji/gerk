@@ -101,7 +101,7 @@ $$
 
 with the initial value $(0, 1)$. We want to apply a Runge-Kutta method with the following Butcher tableau:
 
-<img width="236" alt="rk_eg" src="https://github.com/yfnaji/Gerk/assets/59436765/0105ab38-e0b3-4b97-b5d7-d3fcc1eddb2b">
+<img width="236" src="https://github.com/yfnaji/Gerk/assets/59436765/0105ab38-e0b3-4b97-b5d7-d3fcc1eddb2b">
 
 The $A$ lower triangular matrix in the Butcher tableau above can be implemented in the following way:
 
@@ -147,7 +147,7 @@ plt.plot(x, y, color="r")
 plt.show()
 ```
 
-![gerk](gerk_1.png)
+<img width="500" alt="gerk_1" src=https://github.com/user-attachments/assets/b17a9a2b-8286-464a-a0aa-9a72f6f0a9d2>
 
 ## Adaptive Runge-Kutta Methods
 
@@ -205,7 +205,7 @@ with initial conditions $(-1, e^{-1})$. Note that the exact solution is $y=e^{-x
 
 Here we will use the Bogacki–Shampine (BS23) method which has the following Butcher tableau:
 
-![adapt butcher](adapt_butcher.png)
+<img width="236" alt="adapt_butcher" src="https://github.com/user-attachments/assets/95a88663-cfce-4654-ae14-5fcff6057da2">
 
 For the adaptive Runge-Kutta method, we will use `adaptive_gerk()`. This method's paramters vary slightly from `gerk()`:
 
@@ -249,7 +249,8 @@ plt.plot(x, y, color="r")
 plt.show()
 ```
 
-![adapt gerk](gerk_2.png)
+<img width="500" alt="gerk_2" src=https://github.com/user-attachments/assets/a472aafa-b096-444c-b0b7-86afb988a3c2>
+
 
 In this case, the Runge-Kutta approximation is so accurate that we can barely see the exact curve!
 
