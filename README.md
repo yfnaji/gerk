@@ -261,3 +261,4 @@ The code above yields the following graph:
 * To further generalise the Runge-Kutta method with an indefinite number of $b$ and $c$ arrays
 * Implement *Cython* for faster execution times
 * More descriptive error messages
+* Add unit tests
