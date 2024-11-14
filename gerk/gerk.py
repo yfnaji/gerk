@@ -23,7 +23,7 @@ def gerk(a, b, c, initial, terminal, timesteps, func, enforce_rules=False):
 
     for _ in range(timesteps):
         k[0] = func(x_k, y_k)
-        for i in range(1, len(a) + 1):
+        for i in range(1, len(c)):
             x_k += h * c[i]
             y_k += h * sum([a[i - 1][j] * k[j] for j in range(len(a[i - 1]))])
             k[i] = func(x_k, y_k)
@@ -63,7 +63,7 @@ def adaptive_gerk(a, b_1, b_2, c, initial, terminal, timesteps, func, enforce_ru
 
     for _ in range(timesteps):
         k[0] = func(x_k, y_k)
-        for i in range(1, len(a) + 1):
+        for i in range(1, len(c)):
             x_k += h * c[i]
             y_k += h * sum([a[i - 1][j] * k[j] for j in range(len(a[i - 1]))])
             k[i] = func(x_k, y_k)
