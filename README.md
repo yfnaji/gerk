@@ -1,5 +1,7 @@
 # Generalized Explicit Runge-Kutta (GERK)
 
+https://badgen.net/badge/version/1.0.2/red
+
 A package for the curious mathematicians and engineers who want to experiment the Runge-Kutta method with their own coefficients.
 
 [PyPI link](https://pypi.org/project/gerk/)
