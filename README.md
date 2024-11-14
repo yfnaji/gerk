@@ -217,7 +217,7 @@ with initial conditions $(-1, e^{-1})$. Note that the exact solution is $y=e^{-x
 
 Here we will use the Bogacki–Shampine (BS23) method which has the following Butcher tableau:
 
-<img width="247" alt="adapt_butcher" src="https://github.com/user-attachments/assets/95a88663-cfce-4654-ae14-5fcff6057da2">
+<img width="247" alt="adapt_butcher" src="https://github.com/user-attachments/assets/2b9239ec-a542-4213-9d4a-2b31e44481e1">
 
 For the adaptive Runge-Kutta method, we will use `adaptive_gerk()`. This method's paramters vary slightly from `gerk()`:
 
