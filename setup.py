@@ -3,7 +3,7 @@ from pathlib import Path
 import codecs
 import os
 
-VERSION = "1.0.0"
+VERSION = "1.0.2"
 DESCRIPTION = "Generalized Explicit Runge-Kutta"
 
 this_directory = Path(__file__).parent
