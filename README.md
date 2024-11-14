@@ -165,7 +165,7 @@ The code above yields the following graph:
 
 There is an alternate way to utilise the Runge-Kutta method by employing an additional distinct $b$ array. The Butcher tableau for such methods take the form:
 
-<img width="337" alt="adaptive_butcher" src="https://github.com/user-attachments/assets/855c531c-a75c-485b-9f30-2f6b2a379abe">
+<img width="247" alt="adapt_butcher" src="https://github.com/user-attachments/assets/2b9239ec-a542-4213-9d4a-2b31e44481e1">
 
 where $b_1$ and $b_2$ are the two distinct $b$ arrays.
 
@@ -217,7 +217,7 @@ with initial conditions $(-1, e^{-1})$. Note that the exact solution is $y=e^{-x
 
 Here we will use the Bogacki–Shampine (BS23) method which has the following Butcher tableau:
 
-<img width="247" alt="adapt_butcher" src="https://github.com/user-attachments/assets/2b9239ec-a542-4213-9d4a-2b31e44481e1">
+<img width="247" alt="adapt_butcher" src="https://github.com/user-attachments/assets/fb1b42c5-0727-4aad-91f3-fa66b908aaf1">
 
 For the adaptive Runge-Kutta method, we will use `adaptive_gerk()`. This method's paramters vary slightly from `gerk()`:
 
