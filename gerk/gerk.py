@@ -5,7 +5,7 @@ def gerk(a, b, c, initial, terminal, timesteps, func, enforce_rules=False):
     try:
         class GerkError(Exception):
             __module__ = "builtins"
-        assert type(timesteps) == int and timesteps > 0
+        assert type(timesteps) is int and timesteps > 0
         assert len(b) == len(c) == len(a) + 1 
         if enforce_rules:
             assert sum(b) == 1
@@ -41,7 +41,7 @@ def adaptive_gerk(a, b_1, b_2, c, initial, terminal, timesteps, func, enforce_ru
     try:
         class GerkError(Exception):
             __module__ = "builtins"
-        assert type(timesteps) == int and timesteps > 0
+        assert type(timesteps) is int and timesteps > 0
         assert len(b_1) == len(b_2) == len(c) == len(a) + 1
         if enforce_rules:
             assert sum(b_1) == 1
@@ -49,7 +49,7 @@ def adaptive_gerk(a, b_1, b_2, c, initial, terminal, timesteps, func, enforce_ru
             assert round(sum([b2i * ci for b2i, ci in zip(b_2, c)]), 1) == 0.5
             for i in range(len(c)):
                 assert sum(a[i]) == c[i]
-    except AssertionError as e:
+    except AssertionError:
         raise GerkError("A condition has failed. Please check your Runge-Kutta coefficients.")
     
     k = np.zeros(len(b_1))
