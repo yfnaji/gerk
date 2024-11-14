@@ -17,7 +17,6 @@ def gerk(a, b, c, initial, terminal, timesteps, func, enforce_rules=False):
     
     k = np.zeros(len(b))
     h = (terminal - initial[0]) / timesteps
-    print(h)
     x_n, y_n = initial
     x, y = [x_n], [y_n]
     x_k, y_k = x_n, y_n
@@ -47,7 +46,7 @@ def adaptive_gerk(a, b_1, b_2, c, initial, terminal, timesteps, func, enforce_ru
         if enforce_rules:
             assert sum(b_1) == 1
             assert round(sum([b1i * ci for b1i, ci in zip(b_1, c)]), 1) == 0.5
-            assert round(sum([b2i * ci for b2i, ci in zip(b_1, c)]), 1) == 0.5
+            assert round(sum([b2i * ci for b2i, ci in zip(b_2, c)]), 1) == 0.5
             for i in range(len(c)):
                 assert sum(a[i]) == c[i]
     except AssertionError as e:
@@ -70,7 +69,6 @@ def adaptive_gerk(a, b_1, b_2, c, initial, terminal, timesteps, func, enforce_ru
             k[i] = func(x_k, y_k)
 
         if h * np.dot((arr_b_1 - arr_b_2), k) > tolerance:
-
             h *= 0.9 ** (1 / (order + 1))
             continue
 
