@@ -7,7 +7,7 @@ A package for the curious mathematicians and engineers who want to experiment th
 
 [PyPI link](https://pypi.org/project/gerk/)
 
-[GitHub link](https://github.com/yfnaji/Gerk)
+[GitHub link](https://github.com/yfnaji/gerk)
 
 ## Motivation
 
@@ -60,11 +60,17 @@ The idea is to calculate various slopes at point $y_n$ to ascertain a weighted o
 
 Most packages for the Runge-Kutta method usually have the coefficients $a_{ij}$, $b_i$ and $c_i$ determined beforehand for known methods such as the *Forward-Euler method*, the *1/4 rule*, *the 3/8 rule* etc, but do not allow one to customerize their own Runge-Kutta.
 
-Gerk is an easy interface to allow the user to determine their own coefficient values for the Runge-Kutta method.
+`gerk` is an easy interface to allow the user to determine their own coefficient values for the Runge-Kutta method.
 
 ## How to use Gerk
 
-We can simply import `Gerk` in the following way:
+First you must install `gerk` with the following command:
+
+```
+pip install gerk
+```
+
+We can then import `gerk` in the following way:
 
 ```
 from gerk import gerk
@@ -72,7 +78,7 @@ from gerk import gerk
 
 ## Parameters
 
-As seen in mathematics above, there is quite a bit information required to execute the Runge-Kutta method. This has been broken down into arguments to be passed into the `Gerk` class:
+As seen in mathematics above, there is quite a bit information required to execute the Runge-Kutta method. This has been broken down into parameters to be passed into `gerk()`:
 
 - `a` The $A$ matrix in the Butcher tableau. This **must** be a lower triangular matrix that is formatted as a list of lists that contain floats, or integers
 - `b` The $b$ array. Must be a list of floats, decimals or integers
