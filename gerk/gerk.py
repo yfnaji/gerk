@@ -53,8 +53,7 @@ def adaptive_gerk(a, b_1, b_2, c, initial, terminal, timesteps, func, enforce_ru
         raise GerkError("A condition has failed. Please check your Runge-Kutta coefficients.")
     
     k = np.zeros(len(b_1))
-    arr_b_1 = np.array(b_1)
-    arr_b_2 = np.array(b_2)
+    arr_b_1, arr_b_2 = np.array(b_1), np.array(b_2)
     h = (terminal - initial[0]) / timesteps
     order = min([x for x in b_1 if x], [x for x in b_2 if x])
     x_n, y_n = initial
