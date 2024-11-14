@@ -1,7 +1,5 @@
 from setuptools import setup, find_packages
 from pathlib import Path
-import codecs
-import os
 
 VERSION = "1.0.2"
 DESCRIPTION = "Generalized Explicit Runge-Kutta"
