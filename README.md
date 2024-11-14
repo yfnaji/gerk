@@ -80,7 +80,7 @@ As seen in mathematics above, there is quite a bit information required to execu
 - `func` The function expression to be numerically integrated
 - `enforce_rules` (Optional) A boolean to enforce conventional Runge-Kutta rules
 
-
+The function will output the time steps and approximated y values as a tuple of lists of floats.
 
 ## Conditions
 
@@ -107,7 +107,7 @@ with the initial value $(0, 1)$. We want to apply a Runge-Kutta method with the 
 The $A$ lower triangular matrix in the Butcher tableau above can be implemented in the following way:
 
 ```python
-a = [ 
+a = [
         [1/3],
         [-1/3, 1],
         [1, -1, 1]
@@ -156,24 +156,24 @@ The code above yields the following graph:
 
 There is an alternate way to utilise the Runge-Kutta method by employing an additional distinct $b$ array. The Butcher tableau for such methods take the form:
 
-<img width="242" alt="adaptive_butcher" src="https://user-images.githubusercontent.com/59436765/210662922-f5fbf612-a56b-4679-af2c-5eca4956771d.png">
+<img width="337" alt="adaptive_butcher" src="https://github.com/user-attachments/assets/855c531c-a75c-485b-9f30-2f6b2a379abe">
 
-where $b_1$ and $b_2$ are the distinct 2 $b$ arrays.
+where $b_1$ and $b_2$ are the two distinct $b$ arrays.
 
 This method is not too disimilar to the original Runge-Kutta method. We calculate the $k$'s in the same way as before, but there is an extra step when evaluating $y_{n+1}$. 
 
-Although we do calculate $y_{n+1}$ in same way outlined above, we also calculate $\hat{y}_{n+1}$:
+Although we do calculate $y_{n+1}$ in same way outlined above, we also calculate $\gamma_{n+1}$:
 
 $$
-y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_{1i}\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y}_{n+1} = y_{n} + h \sum_{i=1}^{r} b_{2i}\cdot k_{i}(x_n, y_n)
+y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_{1i}\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \gamma_{n+1} = y_{n} + h \sum_{i=1}^{r} b_{2i}\cdot k_{i}(x_n, y_n)
 $$
 
-_Note_ that the calculation for $\hat{y}$ requires the use of $y_n$ and **not** $\hat{y}_n$.
+_Note_ that the calculation for $\gamma$ requires the use of $y_n$ and **not** $\gamma_n$.
 
 For every time step, we calculate the following error:
 
 $$
-E := \left|y_{n+1}-\hat{y}_{n+1}\right|
+E := \left|y_{n+1}-\gamma_{n+1}\right|
 $$
 
 Now we define the tolerance, $\mathcal{E}$, which will act as the maximum acceptable value for $E$.
@@ -208,7 +208,7 @@ with initial conditions $(-1, e^{-1})$. Note that the exact solution is $y=e^{-x
 
 Here we will use the Bogacki–Shampine (BS23) method which has the following Butcher tableau:
 
-<img width="236" alt="adapt_butcher" src="https://github.com/user-attachments/assets/95a88663-cfce-4654-ae14-5fcff6057da2">
+<img width="247" alt="adapt_butcher" src="https://github.com/user-attachments/assets/95a88663-cfce-4654-ae14-5fcff6057da2">
 
 For the adaptive Runge-Kutta method, we will use `adaptive_gerk()`. This method's paramters vary slightly from `gerk()`:
 
@@ -222,6 +222,8 @@ For the adaptive Runge-Kutta method, we will use `adaptive_gerk()`. This method'
 - `func` The function expression to be numerically integrated
 - `enforce_rules` (Optional) A boolean to enforce conventional Runge-Kutta rules. Defaulted to `False`
 - `tolerance` (Optional) A float representing the maximum threshold of the adaptive step. Defaulted to `1e-4`
+
+Similar to `gerk()`, this function will output the time steps and approximated y values as a tuple of lists of floats.
 
 ```python
 from math import exp
@@ -262,3 +264,4 @@ The code above yields the following graph:
 * Implement *Cython* for faster execution times
 * More descriptive error messages
 * Add unit tests
+* Implement Stochastic Runge-Kutta method
