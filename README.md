@@ -57,14 +57,14 @@ The idea is to calculate various slopes at point $y_n$ to ascertain a weighted o
 
 Most packages for the Runge-Kutta method usually have the coefficients $a_{ij}$, $b_i$ and $c_i$ determined beforehand for known methods such as the *Forward-Euler method*, the *1/4 rule*, *the 3/8 rule* etc, but do not allow one to customerize their own Runge-Kutta.
 
-Gerk is an easy interface to allow the user to determine their own coefficient values for the Runge-Kutta method. The package can return the approximations in the form of an array, a plot of the approximated curve (using matplotlib) and also compare with real values (if available) to produce errors and even an efficiency graph!
+Gerk is an easy interface to allow the user to determine their own coefficient values for the Runge-Kutta method.
 
 ## How to use Gerk
 
 We can simply import `Gerk` in the following way:
 
 ```
-from gerk import Gerk
+from gerk import gerk
 ```
 
 ## Parameters
@@ -81,6 +81,7 @@ As seen in mathematics above, there is quite a bit information required to execu
 - `enforce_rules` (Optional) A boolean to enforce conventional Runge-Kutta rules
 
 
+
 ## Conditions
 
 There is no consensus to what conditions must hold regarding the coefficients you choose for your method, however, some known Runge-Kutta methods do consistently conform to some known conditions.
@@ -89,7 +90,7 @@ These conditions are
 
 $$\sum_{i=1}^{r}b_i=1 \ \ \ \ \sum_{i=1}^{r}b_ic_i = 1/2 \ \ \ \ \sum_{j=1}^{r}a_{ij} = c_i$$
 
-which can be enforced by the `enforce_rules` respectively. These parameters have been set to `False` by default to allow the user to freely explore and experiment.
+which can be enforced by the `enforce_rules` parameter, which is defaulted to `False`.
 
 ## Example
 
@@ -147,6 +148,8 @@ plt.plot(x, y, color="r")
 plt.show()
 ```
 
+The code above yields the following graph:
+
 <img width="500" alt="gerk_1" src=https://github.com/user-attachments/assets/b17a9a2b-8286-464a-a0aa-9a72f6f0a9d2>
 
 ## Adaptive Runge-Kutta Methods
@@ -155,14 +158,14 @@ There is an alternate way to utilise the Runge-Kutta method by employing an addi
 
 <img width="242" alt="adaptive_butcher" src="https://user-images.githubusercontent.com/59436765/210662922-f5fbf612-a56b-4679-af2c-5eca4956771d.png">
 
-where $b^*_i$ is the additional $b$ array.
+where $b_1$ and $b_2$ are the distinct 2 $b$ arrays.
 
 This method is not too disimilar to the original Runge-Kutta method. We calculate the $k$'s in the same way as before, but there is an extra step when evaluating $y_{n+1}$. 
 
 Although we do calculate $y_{n+1}$ in same way outlined above, we also calculate $\hat{y}_{n+1}$:
 
 $$
-y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_{1i}\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y_{n+1}} = y_{n} + h \sum_{i=1}^{r} b_{2i}\cdot k_{i}(x_n, y_n)
+y_{n+1} = y_{n} + h \sum_{i=1}^{r}b_{1i}\cdot k_{i}(x_n, y_n) \ \ \ \ \ \ \ \ \ \hat{y}_{n+1} = y_{n} + h \sum_{i=1}^{r} b_{2i}\cdot k_{i}(x_n, y_n)
 $$
 
 _Note_ that the calculation for $\hat{y}$ requires the use of $y_n$ and **not** $\hat{y}_n$.
@@ -187,7 +190,7 @@ $$
 
 where $n=\min\left(p,q\right)$, where $p$ and $q$ are the orders $^1$ of $b_i$ and $b^*_i$ respectively.
 
-$^1$ A Runge-Kutta method with matrix $A$ and arrays $b$ and $c$ has order $p$ if
+$^1$ A Runge-Kutta method with matrix $a_{ij}$ and arrays $b$ and $c$ has order $p$ if
 
 $$
 \sum_{i=1}^{p}b_i = 1 \ \ \ \ \sum_{i=1}^{p}b_ic_i = 1/2 \ \ \ \ \sum_{j=1}^{p}a_{ij} = c_i  \ \ \ \ 
@@ -226,9 +229,9 @@ import matplotlib.pyplot as plt
 from gerk import adaptive_gerk
 
 a = [
-    [1/3],
-    [-1/3, 1],
-    [1, -1, 1]
+    [1/2],
+    [0, 3/4],
+    [2/9, 1/3, 4/9]
 ]
 b_1 = [2/9, 1/3, 4/9, 0]
 b_2 = [7/24, 1/4, 1/3, 1/8]
@@ -249,13 +252,12 @@ plt.plot(x, y, color="r")
 plt.show()
 ```
 
+The code above yields the following graph:
+
 <img width="500" alt="gerk_2" src=https://github.com/user-attachments/assets/a472aafa-b096-444c-b0b7-86afb988a3c2>
 
-
-In this case, the Runge-Kutta approximation is so accurate that we can barely see the exact curve!
-
-Efficiency graphs are not available for the adaptive Runge-Kutta method as the number discretizations is not constant.
-
-## Future work
+## In the pipeline
 
 * To further generalise the Runge-Kutta method with an indefinite number of $b$ and $c$ arrays
+* Implement *Cython* for faster execution times
+* More descriptive error messages
