@@ -194,7 +194,7 @@ However, if $E\geq\mathcal{E}$, we will need to adjust the value of $h$ and redo
 The value of $h$ will be adjusted as follows:
 
 $$
-h \rightarrow 0.9\cdot h \cdot\sqrt[n]{\frac{h}{\mathcal{E}}}
+h \rightarrow 0.9\cdot h \cdot\sqrt[n + 1]{\frac{h}{\mathcal{E}}}
 $$
 
 where $n=\min\left(p,q\right)$, where $p$ and $q$ are the orders $^1$ of $b_i$ and $b^*_i$ respectively.
