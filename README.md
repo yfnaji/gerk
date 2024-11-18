@@ -171,13 +171,13 @@ plt.show()
 
 The code above yields the following graph:
 
-<img width="500" alt="gerk_1" src=https://github.com/user-attachments/assets/b17a9a2b-8286-464a-a0aa-9a72f6f0a9d2>
+<img width="500" alt="plot1" src=https://github.com/user-attachments/assets/c2c5f9fb-d127-44fb-975b-60d3c7e84cb5>
 
 ## Adaptive Runge-Kutta Methods
 
 There is an alternate way to utilise the Runge-Kutta method by employing an additional distinct $b$ array. The Butcher tableau for such methods take the form:
 
-<img width="247" alt="adapt_butcher" src="https://github.com/user-attachments/assets/2b9239ec-a542-4213-9d4a-2b31e44481e1">
+<img width="247" alt="adaptive_rk" src="https://github.com/user-attachments/assets/ff8eead1-cb0d-46f9-8d4f-3c194f007d3f">
 
 where $b_1$ and $b_2$ are the two distinct $b$ arrays.
 
@@ -277,7 +277,7 @@ plt.show()
 
 The code above yields the following graph:
 
-<img width="500" alt="gerk_2" src=https://github.com/user-attachments/assets/a472aafa-b096-444c-b0b7-86afb988a3c2>
+<img width="500" alt="plot2" src=https://github.com/user-attachments/assets/d8fe8794-f578-4c38-8065-dc7dca314ecb>
 
 ## In the pipeline
 
