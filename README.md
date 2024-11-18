@@ -137,11 +137,23 @@ Finally, we can define the function with a lambda function:
 func = lambda x, y: y
 ```
 
-Now we are ready to run `gerk()` and plot its output:
+Putting it all together, we are now ready to run `gerk()` and plot its output:
 
 ```python
 import matplotlib.pyplot as plt
 from gerk import gerk
+
+a = [
+        [1/3],
+        [-1/3, 1],
+        [1, -1, 1]
+]
+
+b = [1/8, 3/8, 3/8, 1/8]
+
+c = [0, 1/3, 2/3, 1]
+
+func = lambda x, y: y
 
 x, y = gerk(
         a=a, 
@@ -150,10 +162,10 @@ x, y = gerk(
         initial=(0, 1), 
         timesteps=10000, 
         terminal=1,
-        func=lambda x, y: y,
+        func=func
     )
 
-plt.plot(x, y, color="r")
+plt.plot(x, y)
 plt.show()
 ```
 
@@ -259,7 +271,7 @@ x, y = adaptive_gerk(
         func=lambda x, y: -2 * x * y,
     )
 
-plt.plot(x, y, color="r")
+plt.plot(x, y)
 plt.show()
 ```
 
@@ -269,8 +281,7 @@ The code above yields the following graph:
 
 ## In the pipeline
 
-* To further generalise the Runge-Kutta method with an indefinite number of $b$ and $c$ arrays
+* Further generalise the Runge-Kutta method with an indefinite number of $b$ and $c$ arrays
 * Implement *Cython* for faster execution times
-* More descriptive error messages
 * Add unit tests
 * Implement Stochastic Runge-Kutta method
