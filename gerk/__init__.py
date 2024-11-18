@@ -1,3 +1,3 @@
-from .gerk import gerk, adaptive_gerk
+from .gerk import gerk, adaptive_gerk, GerkError
 
-__all__ = ['gerk', 'adaptive_gerk']
+__all__ = ["gerk", "adaptive_gerk", "GerkError"]
